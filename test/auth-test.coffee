@@ -33,6 +33,13 @@ expect = chai.expect
 process.env[auth_lib.env.ENABLE] = 1
 auth_service_endpoint = 'https://localhost/'
 process.env[auth_lib.env.ENDPOINT] = auth_service_endpoint
+process.env['HE_AUTH_SSL_PASS'] = 'default'
+process.env['HE_IDENTITY_PORTAL_ENDPOINT'] = 'http://localhost:443'
+process.env['HE_IDENTITY_WS_ENDPOINT'] = 'http://localhost:3001'
+process.env['VAULT_DEV_ROOT_TOKEN_ID'] = 'myroot'
+process.env['HE_ISSUER'] = 'issuer'
+process.env['HE_AUDIENCE'] = 'audience'
+
 helper = new Helper(['../src/0_bootstrap.coffee'])
 
 describe 'Authentication', ->
