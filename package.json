@@ -23,7 +23,7 @@
     "did-you-mean": "^0.0.1",
     "easy-table": "^1.0.0",
     "fluent-logger": "^2.2.0",
-    "he-auth-service": "github:eedevops/he-auth-service#v0.1.4",
+    "he-auth-service": "github:eedevops/he-auth-service#v0.1.5",
     "insight": "^0.8.2",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.6.1",
