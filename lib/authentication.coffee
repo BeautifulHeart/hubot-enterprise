@@ -53,12 +53,6 @@ values =
 
 BASIC_AUTH_DOCS = "https://github.com/eedevops/hubot-enterprise/wiki/api#supported-authentication-types"
 
-
-inject_secrets_ttl = (auth) ->
-  auth.ttl = auth.ttl || values.DEFAULT_SECRETS_TTL
-  logger.debug("Injected auth secrets ttl #{auth.ttl}")
-  return auth
-
 # Validates the authentication object passed.
 # Returns a validated auth object or null if validation failed.
 validate_authentication = (authentication) ->
@@ -76,20 +70,23 @@ validate_authentication = (authentication) ->
   if !authentication.ttl
     msg = "Auth secrets ttl not set, using default value = #{values.DEFAULT_SECRETS_TTL}"
     logger.debug(msg)
+    authentication.ttl = values.DEFAULT_SECRETS_TTL
 
   # Generate the appropriate auth object based on its type.
   switch authentication.type
     when TYPES.BASIC_AUTH
       try
         auth = generate_basic_auth(authentication.params)
-        return inject_secrets_ttl auth
+        auth.ttl = authentication.ttl
+        return auth
       catch e
         logger.error(e)
         return null
     when TYPES.IDM_AUTH
       try
         auth = generate_idm_auth(authentication.params)
-        return inject_secrets_ttl auth
+        auth.ttl = authentication.ttl
+        return auth
       catch e
         logger.error(e)
         return null
